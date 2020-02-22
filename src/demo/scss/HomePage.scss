@@ -1,0 +1,29 @@
+@import './shared.scss';
+
+// this is placeholder class, that doesn't appear in compiled code.
+%page-shared {
+  border: 1px solid black;
+}
+
+.homePage {
+  // from scss docs: @extend lets you share a set of CSS properties from one selector to another.
+  @extend %page-shared;
+  font-size: $home-page-font-size;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+// extending linke this would produce code like:
+// .homePage {
+//   border: 1px solid black; }
+
+// .homePage {
+//   font-size: 10px; }
+
+// NOTE that how .homePage selector is doubled. It's because when extending, current selector is added together with
+// 'parent' selector, but in this case it's placeholder selector
+// -> @extend is utility for selectors.
+
+.srbThumbnail {
+  background-image: url('../resources/serbia.png');
+}
