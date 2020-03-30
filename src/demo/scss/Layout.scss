@@ -1,0 +1,94 @@
+/*
+* Screen sizes:
+* xs - width < 576px
+* sm - 576px <= width < 768px
+* md - 768px <= width < 992px
+* lg - 992px <= width < 1200px
+* xl - width >= 1200px
+*/
+
+$columns: 12;
+$sm-breakpoint: 576px;
+$md-breakpoint: 768px;
+$lg-breakpoint: 992px;
+$xl-breakpoint: 1200px;
+$gutter: 15px; // NOTE: Gutter should be always the half of desired spacing between columns.
+
+:global {
+  @mixin withGutter($gutter, $prop) {
+    @if $gutter != 0 {
+      #{$prop}: 0 $gutter;
+    }
+  }
+
+  /* Container is the rows wrapper that determines the maximum width of the grid.
+     Its max-width should vary for different screen sizes?
+     Also, when rows are not inside containers, it's possible that due to gutter(negative margin)
+     horizontal scroll appears.
+  */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    @include withGutter($gutter, padding);
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    @include withGutter(-$gutter, margin);
+  }
+
+  %columns-shared {
+    box-sizing: border-box;
+  }
+
+  .col {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+    box-sizing: border-box;
+    @include withGutter($gutter, padding);
+  }
+
+  @for $width from 1 through $columns {
+    .col-#{$width} {
+      flex-basis: $width / $columns * 100%;
+    }
+  }
+
+  @media (min-width: $sm-breakpoint) {
+    @for $width from 1 through $columns {
+      .col-sm-#{$width} {
+        flex: 0 0 $width / $columns * 100%;
+        max-width: $width / $columns * 100%;
+      }
+    }
+  }
+
+  @media (min-width: $md-breakpoint) {
+    @for $width from 1 through $columns {
+      .col-md-#{$width} {
+        flex: 0 0 $width / $columns * 100%;
+        max-width: $width / $columns * 100%;
+      }
+    }
+  }
+
+  @media (min-width: $lg-breakpoint) {
+    @for $width from 1 through $columns {
+      .col-lg-#{$width} {
+        flex: 0 0 $width / $columns * 100%;
+        max-width: $width / $columns * 100%;
+      }
+    }
+  }
+
+  @media (min-width: $xl-breakpoint) {
+    @for $width from 1 through $columns {
+      .col-xl-#{$width} {
+        flex: 0 0 $width / $columns * 100%;
+        max-width: $width / $columns * 100%;
+      }
+    }
+  }
+}

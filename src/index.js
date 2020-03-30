@@ -13,6 +13,7 @@ if (module.hot) {
     // This is going to be called everytime Root (or it's subpart) updates.
     // Everytime some change happens, webpack runtime is going to follow up imports and if it reaches Root,
     // this handler is going to be called.
+    // NOTE - for more details, navigate to ./store.js:hot.accept
     init(Root);
   });
 }
